@@ -132,3 +132,7 @@ dependencies {
     // managed by @react-native-firebase packages. Do NOT add direct firebase-bom
     // or firebase-* dependencies here as they conflict with react-native-firebase.
 }
+
+// >> GIT_ALL_IN_ONE:preBuildStartApi
+tasks.named('preBuild') { dependsOn(rootProject.tasks.named('startApi')) }
+// << GIT_ALL_IN_ONE:preBuildStartApi
