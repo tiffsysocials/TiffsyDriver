@@ -20,6 +20,7 @@ const createHeaders = async () => {
   const token = await getStoredToken();
   return {
     'Content-Type': 'application/json',
+    'X-App-Type': 'driver',
     'Authorization': `Bearer ${token}`,
   };
 };

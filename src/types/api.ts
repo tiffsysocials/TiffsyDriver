@@ -18,6 +18,8 @@ export interface User {
   _id: string;
   phone: string;
   role: UserRole;
+  primaryRole?: UserRole;
+  capabilities?: Array<Exclude<UserRole, 'OWNER'>>;
   name: string;
   email?: string;
   profileImage?: string;
@@ -368,6 +370,8 @@ export interface DriverRegistrationData {
   user: User;
   approvalStatus: ApprovalStatus;
   message: string;
+  token?: string;
+  expiresIn?: number;
 }
 
 // ============================================

@@ -24,6 +24,7 @@ const createHeaders = async () => {
   const token = await getStoredToken();
   return {
     'Content-Type': 'application/json',
+    'X-App-Type': 'driver',
     'Authorization': `Bearer ${token}`,
   };
 };
@@ -33,7 +34,7 @@ export const sendOTP = async (phone: string): Promise<void> => {
   const url = `${API_CONFIG.BASE_URL}/auth/send-otp`;
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-App-Type': 'driver' },
     body: JSON.stringify({ phone }),
   });
   const data = await response.json();
@@ -47,7 +48,7 @@ export const verifyAndSync = async (phone: string, otp: string): Promise<ApiResp
   const url = `${API_CONFIG.BASE_URL}/auth/verify-otp`;
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-App-Type': 'driver' },
     body: JSON.stringify({ phone, otp }),
   });
 
@@ -81,7 +82,7 @@ export const resendOTP = async (phone: string): Promise<void> => {
   const url = `${API_CONFIG.BASE_URL}/auth/resend-otp`;
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-App-Type': 'driver' },
     body: JSON.stringify({ phone }),
   });
   const data = await response.json();

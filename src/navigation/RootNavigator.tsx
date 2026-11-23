@@ -33,7 +33,8 @@ export default function RootNavigator() {
 
         // OWNER super-role (god-mode) is allowed in alongside DRIVER; it falls
         // through to the `default` case below and lands on Main.
-        if (user?.role && user.role !== "DRIVER" && user.role !== "OWNER") {
+        const driverCapable = user?.role === "DRIVER" || user?.role === "OWNER" || user?.capabilities?.includes("DRIVER");
+        if (user?.role && !driverCapable) {
           await tokenStorage.clearAll();
           setAuthBootstrap({ initialRoute: "Login" });
           setInitialRoute("Auth");
@@ -102,6 +103,7 @@ export default function RootNavigator() {
       initialRouteName={initialRoute}
       screenOptions={{
         headerShown: false,
+        gestureEnabled: true,
       }}
     >
       <Stack.Screen name="Auth" component={AuthNavigator} />
